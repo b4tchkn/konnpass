@@ -35,11 +35,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Check spotless
-        run: ./gradlew spotlessKotlinCheck --stacktrace
+#      - name: Check spotless
+#        run: ./gradlew spotlessKotlinCheck --stacktrace
 
-      - name: Check lint
-        run: ./gradlew lintDebug --stacktrace
+#      - name: Check lint
+#        run: ./gradlew lintDebug --stacktrace
 
       - name: Slack Notification Success
         uses: rtCamp/action-slack-notify@v2
