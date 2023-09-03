@@ -19,7 +19,6 @@ fun HomeScreen(
 ) {
     val event by eventState.event.collectAsState()
 
-
     LaunchedEffect(key1 = Unit) {
         eventState.fetch()
     }
