@@ -2,4 +2,5 @@
 plugins {
     alias(libs.plugins.androidGradlePlugin) apply false
     alias(libs.plugins.kotlinPlugin) apply false
+    alias(libs.plugins.serializationPlugin) apply false
 }

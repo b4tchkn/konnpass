@@ -3,6 +3,7 @@ val ktlint by configurations.creating
 plugins {
     alias(libs.plugins.androidGradlePlugin)
     alias(libs.plugins.kotlinPlugin)
+    alias(libs.plugins.serializationPlugin)
 }
 
 android {
@@ -65,6 +66,12 @@ dependencies {
     implementation(libs.composeUiGraphics)
     implementation(libs.composeUiToolingPreview)
     implementation(libs.composeMaterial3)
+    implementation(libs.retrofit)
+    implementation(libs.retrofitKotlinxSerializationConverter)
+    implementation(libs.okhttp)
+    implementation(libs.kotlinSerializationJson)
+    implementation(libs.hiltNavigationComopse)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidxTestExtJunit)
     androidTestImplementation(libs.androidxTestEspressoEspressoCore)
