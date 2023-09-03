@@ -15,11 +15,31 @@ class EventState : ViewModel() {
 
     val useCase = GetEventsUseCase()
 
-    suspend fun fetch() {
+    suspend fun fetch(
+        eventId: Int? = null,
+        keyword: String? = null,
+        yearMonth: Int? = null,
+        yearMonthDay: Int? = null,
+        nickname: String? = null,
+        ownerNickname: String? = null,
+        seriesId: Int? = null,
+        start: Int? = null,
+        order: Int? = null,
+        count: Int? = null,
+    ) {
         viewModelScope.launch {
-            val result = useCase()
-            println(result)
-            _event.value = result
+            _event.value = useCase(
+                eventId,
+                keyword,
+                yearMonth,
+                yearMonthDay,
+                nickname,
+                ownerNickname,
+                seriesId,
+                start,
+                order,
+                count,
+            )
         }
     }
 }

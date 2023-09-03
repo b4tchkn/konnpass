@@ -9,13 +9,35 @@ import retrofit2.Retrofit
 
 class GetEventsUseCase {
 
-    suspend operator fun invoke(): EventResponseModel {
+    suspend operator fun invoke(
+        eventId: Int?,
+        keyword: String?,
+        yearMonth: Int?,
+        yearMonthDay: Int?,
+        nickname: String?,
+        ownerNickname: String?,
+        seriesId: Int?,
+        start: Int?,
+        order: Int?,
+        count: Int?,
+    ): EventResponseModel {
         val contentType = "application/json".toMediaType()
         val retrofit = Retrofit.Builder()
             .baseUrl("https://connpass.com/api/v1/")
             .addConverterFactory(Json.asConverterFactory(contentType))
             .build()
         val connpassDataSource = retrofit.create(ConnpassDataSource::class.java)
-        return connpassDataSource.getEvents()
+        return connpassDataSource.getEvents(
+            eventId,
+            keyword,
+            yearMonth,
+            yearMonthDay,
+            nickname,
+            ownerNickname,
+            seriesId,
+            start,
+            order,
+            count
+        )
     }
 }
