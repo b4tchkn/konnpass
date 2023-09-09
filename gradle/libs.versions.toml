@@ -8,7 +8,7 @@ androidxActivity = "1.7.2"
 compose = "1.5.1"
 retrofit = "2.9.0"
 okhttp = "4.11.0"
-kotlinSerialization = "1.5.0"
+kotlinSerialization = "1.6.0"
 hiltNavigationCompose = "1.0.0"
 
 junit = "4.13.2"
