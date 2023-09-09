@@ -4,18 +4,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.b4tchkn.konnpass.model.EventResponseModel
 import io.github.b4tchkn.konnpass.usecase.GetEventsUseCase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class EventState : ViewModel() {
-    private val _event = MutableStateFlow<EventResponseModel?>(null)
-    val event: StateFlow<EventResponseModel?>
+
+    private val _event =
+        MutableStateFlow<AsyncValue<EventResponseModel>>(AsyncValue())
+    val event: StateFlow<AsyncValue<EventResponseModel>>
         get() = _event
 
     val useCase = GetEventsUseCase()
 
-    suspend fun fetch(
+    init {
+        viewModelScope.launch {
+            refresh(count = 50)
+        }
+    }
+
+    suspend fun refresh(
         eventId: Int? = null,
         keyword: String? = null,
         yearMonth: Int? = null,
@@ -28,18 +37,28 @@ class EventState : ViewModel() {
         count: Int? = null,
     ) {
         viewModelScope.launch {
-            _event.value = useCase(
-                eventId,
-                keyword,
-                yearMonth,
-                yearMonthDay,
-                nickname,
-                ownerNickname,
-                seriesId,
-                start,
-                order,
-                count,
-            )
+            kotlin.runCatching {
+                _event.value = _event.value.copy(loading = true)
+                delay(1000L)
+                useCase(
+                    eventId,
+                    keyword,
+                    yearMonth,
+                    yearMonthDay,
+                    nickname,
+                    ownerNickname,
+                    seriesId,
+                    start,
+                    order,
+                    count,
+                )
+            }.onSuccess {
+                _event.value = _event.value.copy(value = it)
+            }.onFailure {
+                _event.value = _event.value.copy(error = it)
+            }.also {
+                _event.value = _event.value.copy(loading = false)
+            }
         }
     }
 }
