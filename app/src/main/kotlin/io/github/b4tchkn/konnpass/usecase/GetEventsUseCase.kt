@@ -37,7 +37,7 @@ class GetEventsUseCase {
             seriesId,
             start,
             order,
-            count
+            count,
         )
     }
 }
