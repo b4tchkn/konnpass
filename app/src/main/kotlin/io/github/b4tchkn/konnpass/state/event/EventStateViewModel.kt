@@ -1,24 +1,12 @@
-package io.github.b4tchkn.konnpass.state
+package io.github.b4tchkn.konnpass.state.event
 
 import androidx.lifecycle.viewModelScope
 import io.github.b4tchkn.konnpass.model.EventResponseModel
+import io.github.b4tchkn.konnpass.state.AsyncStateViewModel
 import io.github.b4tchkn.konnpass.usecase.GetEventsUseCase
 import kotlinx.coroutines.launch
 
-data class EventStatePram(
-    val eventId: Int? = null,
-    val keyword: String? = null,
-    val yearMonth: Int? = null,
-    val yearMonthDay: Int? = null,
-    val nickName: String? = null,
-    val ownerNickName: String? = null,
-    val seriesId: Int? = null,
-    val start: Int? = null,
-    val order: Int? = null,
-    val count: Int? = null,
-)
-
-class EventState : AsyncStateViewModel<EventResponseModel>() {
+class EventStateViewModel : AsyncStateViewModel<EventResponseModel>() {
 
     init {
         viewModelScope.launch {
@@ -28,7 +16,7 @@ class EventState : AsyncStateViewModel<EventResponseModel>() {
 
     override suspend fun fetch(): EventResponseModel {
         val useCase = GetEventsUseCase()
-        val param = EventStatePram(
+        val param = EventStateViewModelParam(
             count = LIMIT_LOAD_COUNT,
         )
         return useCase(

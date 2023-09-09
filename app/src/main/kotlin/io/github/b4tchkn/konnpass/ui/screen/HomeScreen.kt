@@ -11,20 +11,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.b4tchkn.konnpass.model.EventModel
-import io.github.b4tchkn.konnpass.state.EventState
+import io.github.b4tchkn.konnpass.state.event.EventStateViewModel
 
 @Composable
 fun HomeScreen(
-    eventState: EventState = hiltViewModel(),
+    eventStateViewModel: EventStateViewModel = hiltViewModel(),
 ) {
-    val event by eventState.state.collectAsState()
+    val eventState by eventStateViewModel.state.collectAsState()
 
     Scaffold { padding ->
         ScreenCoordinator(
             modifier = Modifier.padding(padding),
-            states = listOf(eventState),
+            states = listOf(eventStateViewModel),
         ) {
-            HomeScreen(events = event.value!!.events)
+            HomeScreen(events = eventState.data!!.events)
         }
     }
 }

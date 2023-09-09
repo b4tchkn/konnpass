@@ -34,7 +34,7 @@ fun <V, T : AsyncStateViewModel<V>> ScreenCoordinator(
     val collectedStates = states.map { it.state.collectAsState() }
 
     val loading = collectedStates.map { it.value.loading }.any { it }
-    val hasAllValues = collectedStates.map { it.value.value }.all { it != null }
+    val hasAllValues = collectedStates.map { it.value.data }.all { it != null }
     val hasError = collectedStates.map { it.value.error }.any { it != null }
 
     val composableScope = rememberCoroutineScope()
@@ -96,7 +96,7 @@ class FakeAsyncStateViewModel(asyncValue: AsyncValue<Unit>) : AsyncStateViewMode
 @Composable
 fun PreviewSuccess() {
     ScreenCoordinator(
-        states = listOf(FakeAsyncStateViewModel(AsyncValue(value = Unit))),
+        states = listOf(FakeAsyncStateViewModel(AsyncValue(data = Unit))),
     ) {
         Text(text = "This is content")
     }

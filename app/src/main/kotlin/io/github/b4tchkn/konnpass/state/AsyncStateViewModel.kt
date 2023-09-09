@@ -25,7 +25,7 @@ abstract class AsyncStateViewModel<T> : ViewModel() {
                 _state.value = _state.value.copy(loading = true)
                 block()
             }.onSuccess {
-                _state.value = _state.value.copy(value = it)
+                _state.value = _state.value.copy(data = it)
             }.onFailure {
                 _state.value = _state.value.copy(error = it)
             }.also {
