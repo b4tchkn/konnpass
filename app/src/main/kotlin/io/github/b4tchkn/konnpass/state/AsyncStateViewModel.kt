@@ -8,19 +8,12 @@ import kotlinx.coroutines.launch
 
 abstract class AsyncStateViewModel<S> : ViewModel() {
     private val _state = MutableStateFlow<AsyncValue<S>>(AsyncValue())
-
     val state: StateFlow<AsyncValue<S>>
         get() = _state
 
-    init {
-        viewModelScope.launch {
-            refresh()
-        }
-    }
-
     abstract suspend fun fetch(): S
 
-    private suspend fun refresh() = runAsync {
+    suspend fun refresh() = runAsync {
         fetch()
     }
 
