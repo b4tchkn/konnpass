@@ -1,64 +1,39 @@
 package io.github.b4tchkn.konnpass.state
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import io.github.b4tchkn.konnpass.model.EventResponseModel
 import io.github.b4tchkn.konnpass.usecase.GetEventsUseCase
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
-class EventState : ViewModel() {
+data class EventStatePram(
+    val eventId: Int? = null,
+    val keyword: String? = null,
+    val yearMonth: Int? = null,
+    val yearMonthDay: Int? = null,
+    val nickName: String? = null,
+    val ownerNickName: String? = null,
+    val seriesId: Int? = null,
+    val start: Int? = null,
+    val order: Int? = null,
+    val count: Int? = null,
+)
 
-    private val _event =
-        MutableStateFlow<AsyncValue<EventResponseModel>>(AsyncValue())
-    val event: StateFlow<AsyncValue<EventResponseModel>>
-        get() = _event
+class EventState : AsyncStateViewModel<EventResponseModel>() {
 
-    val useCase = GetEventsUseCase()
-
-    init {
-        viewModelScope.launch {
-            refresh(count = 50)
-        }
-    }
-
-    suspend fun refresh(
-        eventId: Int? = null,
-        keyword: String? = null,
-        yearMonth: Int? = null,
-        yearMonthDay: Int? = null,
-        nickname: String? = null,
-        ownerNickname: String? = null,
-        seriesId: Int? = null,
-        start: Int? = null,
-        order: Int? = null,
-        count: Int? = null,
-    ) {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                _event.value = _event.value.copy(loading = true)
-                delay(1000L)
-                useCase(
-                    eventId,
-                    keyword,
-                    yearMonth,
-                    yearMonthDay,
-                    nickname,
-                    ownerNickname,
-                    seriesId,
-                    start,
-                    order,
-                    count,
-                )
-            }.onSuccess {
-                _event.value = _event.value.copy(value = it)
-            }.onFailure {
-                _event.value = _event.value.copy(error = it)
-            }.also {
-                _event.value = _event.value.copy(loading = false)
-            }
-        }
+    override suspend fun fetch(): EventResponseModel {
+        val useCase = GetEventsUseCase()
+        val param = EventStatePram(
+            count = 10,
+        )
+        return useCase(
+            eventId = param.eventId,
+            keyword = param.keyword,
+            yearMonth = param.yearMonth,
+            yearMonthDay = param.yearMonthDay,
+            nickname = param.nickName,
+            ownerNickname = param.ownerNickName,
+            seriesId = param.seriesId,
+            start = param.start,
+            order = param.order,
+            count = 10,
+        )
     }
 }
