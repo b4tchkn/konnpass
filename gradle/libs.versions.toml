@@ -3,9 +3,14 @@ androidGradle = "8.1.1"
 kotlin = "1.8.10"
 
 androidxCore = "1.12.0"
-androidxLifecycle = "2.6.1"
+androidxLifecycle = "2.6.2"
 androidxActivity = "1.7.2"
-compose = "1.5.0"
+compose = "1.5.1"
+retrofit = "2.9.0"
+okhttp = "4.10.0"
+kotlinSerialization = "1.5.0"
+hiltNavigationCompose = "1.0.0"
+
 junit = "4.13.2"
 androidxTestExt = "1.1.5"
 androidxTestEspresso = "3.5.1"
@@ -18,6 +23,11 @@ composeUi = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 composeUiGraphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
 composeUiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 composeMaterial3 = { module = "androidx.compose.material3:material3", version = "1.1.1" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofitKotlinxSerializationConverter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+kotlinSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+hiltNavigationComopse = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose"}
 
 junit = { module = "junit:junit", version.ref = "junit" }
 androidxTestExtJunit = { module = "androidx.test.ext:junit", version.ref = "androidxTestExt" }
@@ -29,3 +39,4 @@ composeUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", versi
 [plugins]
 androidGradlePlugin = { id = "com.android.application", version.ref = "androidGradle" }
 kotlinPlugin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+serializationPlugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
