@@ -1,45 +1,51 @@
 package io.github.b4tchkn.konnpass.state
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.b4tchkn.konnpass.model.EventResponseModel
 import io.github.b4tchkn.konnpass.usecase.GetEventsUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class EventState : ViewModel() {
-    private val _event = MutableStateFlow<EventResponseModel?>(null)
-    val event: StateFlow<EventResponseModel?>
-        get() = _event
+data class EventStatePram(
+    val eventId: Int? = null,
+    val keyword: String? = null,
+    val yearMonth: Int? = null,
+    val yearMonthDay: Int? = null,
+    val nickName: String? = null,
+    val ownerNickName: String? = null,
+    val seriesId: Int? = null,
+    val start: Int? = null,
+    val order: Int? = null,
+    val count: Int? = null,
+)
 
-    val useCase = GetEventsUseCase()
+class EventState : AsyncStateViewModel<EventResponseModel>() {
 
-    suspend fun fetch(
-        eventId: Int? = null,
-        keyword: String? = null,
-        yearMonth: Int? = null,
-        yearMonthDay: Int? = null,
-        nickname: String? = null,
-        ownerNickname: String? = null,
-        seriesId: Int? = null,
-        start: Int? = null,
-        order: Int? = null,
-        count: Int? = null,
-    ) {
+    init {
         viewModelScope.launch {
-            _event.value = useCase(
-                eventId,
-                keyword,
-                yearMonth,
-                yearMonthDay,
-                nickname,
-                ownerNickname,
-                seriesId,
-                start,
-                order,
-                count,
-            )
+            refresh()
         }
+    }
+
+    override suspend fun fetch(): EventResponseModel {
+        val useCase = GetEventsUseCase()
+        val param = EventStatePram(
+            count = LIMIT_LOAD_COUNT,
+        )
+        return useCase(
+            eventId = param.eventId,
+            keyword = param.keyword,
+            yearMonth = param.yearMonth,
+            yearMonthDay = param.yearMonthDay,
+            nickname = param.nickName,
+            ownerNickname = param.ownerNickName,
+            seriesId = param.seriesId,
+            start = param.start,
+            order = param.order,
+            count = param.count,
+        )
+    }
+
+    companion object {
+        private const val LIMIT_LOAD_COUNT = 10
     }
 }
