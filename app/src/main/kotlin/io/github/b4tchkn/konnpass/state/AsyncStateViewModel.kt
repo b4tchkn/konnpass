@@ -6,18 +6,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-abstract class AsyncStateViewModel<S> : ViewModel() {
-    private val _state = MutableStateFlow<AsyncValue<S>>(AsyncValue())
-    val state: StateFlow<AsyncValue<S>>
+abstract class AsyncStateViewModel<T> : ViewModel() {
+    private val _state = MutableStateFlow<AsyncValue<T>>(AsyncValue())
+    val state: StateFlow<AsyncValue<T>>
         get() = _state
 
-    abstract suspend fun fetch(): S
+    abstract suspend fun fetch(): T
 
     suspend fun refresh() = runAsync {
         fetch()
     }
 
-    suspend fun runAsync(block: suspend () -> S) {
+    suspend fun runAsync(block: suspend () -> T) {
         viewModelScope.launch {
             kotlin.runCatching {
                 _state.value = _state.value.copy(loading = true)

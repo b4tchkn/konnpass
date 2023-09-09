@@ -29,7 +29,7 @@ class EventState : AsyncStateViewModel<EventResponseModel>() {
     override suspend fun fetch(): EventResponseModel {
         val useCase = GetEventsUseCase()
         val param = EventStatePram(
-            count = MAX_LOAD_COUNT,
+            count = LIMIT_LOAD_COUNT,
         )
         return useCase(
             eventId = param.eventId,
@@ -46,6 +46,6 @@ class EventState : AsyncStateViewModel<EventResponseModel>() {
     }
 
     companion object {
-        private const val MAX_LOAD_COUNT = 10
+        private const val LIMIT_LOAD_COUNT = 10
     }
 }
