@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">konnpass</string>
+    <string name="error_title">データの取得中にエラーが起きました\nリトライで解消できる場合があります</string>
 </resources>
