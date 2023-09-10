@@ -1,12 +1,12 @@
 package io.github.b4tchkn.konnpass.di
 
 import dagger.Module
-import java.util.concurrent.TimeUnit
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.b4tchkn.konnpass.data.ConnpassDataSource
 import okhttp3.OkHttpClient
+import java.util.concurrent.TimeUnit
 
 @Module
 @InstallIn(SingletonComponent::class)

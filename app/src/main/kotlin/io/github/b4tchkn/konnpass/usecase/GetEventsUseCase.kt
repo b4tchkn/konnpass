@@ -1,11 +1,7 @@
 package io.github.b4tchkn.konnpass.usecase
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import io.github.b4tchkn.konnpass.data.ConnpassDataSource
 import io.github.b4tchkn.konnpass.model.EventResponseModel
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
-import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
 
