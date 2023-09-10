@@ -17,30 +17,30 @@ androidxTestExt = "1.1.5"
 androidxTestEspresso = "3.5.1"
 
 [libraries]
-androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
-androidxLifecycleLifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
-androidxActivityActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
-composeUi = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-composeUiGraphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
-composeUiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-composeMaterial3 = { module = "androidx.compose.material3:material3", version = "1.1.1" }
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-retrofitKotlinxSerializationConverter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
-kotlinSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
-hiltNavigationComopse = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose"}
-daggerHiltAndroid = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-daggerHiltAndroidCompiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+androidx-compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.1.1" }
+retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit2-kotlinx-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
+okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+androidx-hilt-navigation-comopse = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose"}
+dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
-androidxTestExtJunit = { module = "androidx.test.ext:junit", version.ref = "androidxTestExt" }
-androidxTestEspressoEspressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "androidxTestEspresso" }
-composeUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
-composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-composeUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidxTestExt" }
+androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidxTestEspresso" }
+androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 
 [plugins]
-androidGradlePlugin = { id = "com.android.application", version.ref = "androidGradle" }
-kotlinPlugin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-serializationPlugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-hiltAndroidGradlePlugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+android-application = { id = "com.android.application", version.ref = "androidGradle" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

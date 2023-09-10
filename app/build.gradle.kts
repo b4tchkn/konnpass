@@ -2,10 +2,10 @@ val ktlint by configurations.creating
 
 plugins {
     kotlin("kapt")
-    alias(libs.plugins.androidGradlePlugin)
-    alias(libs.plugins.kotlinPlugin)
-    alias(libs.plugins.serializationPlugin)
-    alias(libs.plugins.hiltAndroidGradlePlugin)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.plugin.serialization)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
@@ -61,27 +61,27 @@ dependencies {
         }
     }
 
-    implementation(libs.androidxCoreKtx)
-    implementation(libs.androidxLifecycleLifecycleRuntimeKtx)
-    implementation(libs.androidxActivityActivityCompose)
-    implementation(libs.composeUi)
-    implementation(libs.composeUiGraphics)
-    implementation(libs.composeUiToolingPreview)
-    implementation(libs.composeMaterial3)
-    implementation(libs.retrofit)
-    implementation(libs.retrofitKotlinxSerializationConverter)
-    implementation(libs.okhttp)
-    implementation(libs.kotlinSerializationJson)
-    implementation(libs.hiltNavigationComopse)
-    implementation(libs.daggerHiltAndroid)
-    kapt(libs.daggerHiltAndroidCompiler)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.retrofit2)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.okhttp3)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.hilt.navigation.comopse)
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.android.compiler)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidxTestExtJunit)
-    androidTestImplementation(libs.androidxTestEspressoEspressoCore)
-    androidTestImplementation(libs.composeUiTestJunit4)
-    debugImplementation(libs.composeUiTooling)
-    debugImplementation(libs.composeUiTestManifest)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
 
 val ktlintCheck by tasks.registering(JavaExec::class) {
