@@ -1,9 +1,11 @@
 val ktlint by configurations.creating
 
 plugins {
+    kotlin("kapt")
     alias(libs.plugins.androidGradlePlugin)
     alias(libs.plugins.kotlinPlugin)
     alias(libs.plugins.serializationPlugin)
+    alias(libs.plugins.hiltAndroidGradlePlugin)
 }
 
 android {
@@ -33,11 +35,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures {
         compose = true
@@ -71,6 +73,8 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.kotlinSerializationJson)
     implementation(libs.hiltNavigationComopse)
+    implementation(libs.daggerHiltAndroid)
+    kapt(libs.daggerHiltAndroidCompiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidxTestExtJunit)
