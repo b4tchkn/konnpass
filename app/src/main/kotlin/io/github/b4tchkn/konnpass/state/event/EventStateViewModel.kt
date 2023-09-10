@@ -1,12 +1,17 @@
 package io.github.b4tchkn.konnpass.state.event
 
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.b4tchkn.konnpass.model.EventResponseModel
 import io.github.b4tchkn.konnpass.state.AsyncStateViewModel
 import io.github.b4tchkn.konnpass.usecase.GetEventsUseCase
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EventStateViewModel : AsyncStateViewModel<EventResponseModel>() {
+@HiltViewModel
+class EventStateViewModel @Inject constructor(
+    private val useCase: GetEventsUseCase,
+) : AsyncStateViewModel<EventResponseModel>() {
 
     init {
         viewModelScope.launch {
@@ -15,7 +20,6 @@ class EventStateViewModel : AsyncStateViewModel<EventResponseModel>() {
     }
 
     override suspend fun fetch(): EventResponseModel {
-        val useCase = GetEventsUseCase()
         val param = EventStateViewModelParam(
             count = LIMIT_LOAD_COUNT,
         )

@@ -1,6 +1,12 @@
 package io.github.b4tchkn.konnpass.data
 
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import io.github.b4tchkn.konnpass.model.EventResponseModel
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -68,4 +74,20 @@ interface ConnpassDataSource {
          */
         @Query("count") count: Int?,
     ): EventResponseModel
+
+    companion object {
+        private const val BASE_URL = "https://connpass.com/api/v1/"
+
+        fun create(
+            okHttpClient: OkHttpClient,
+        ): ConnpassDataSource {
+            val contentType = "application/json".toMediaType()
+            return Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(Json.asConverterFactory(contentType))
+                .build()
+                .create(ConnpassDataSource::class.java)
+        }
+    }
 }

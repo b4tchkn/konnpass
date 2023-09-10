@@ -10,6 +10,7 @@ retrofit = "2.9.0"
 okhttp = "4.11.0"
 kotlinSerialization = "1.5.0"
 hiltNavigationCompose = "1.0.0"
+hilt = "2.44"
 
 junit = "4.13.2"
 androidxTestExt = "1.1.5"
@@ -28,6 +29,8 @@ retrofitKotlinxSerializationConverter = { group = "com.jakewharton.retrofit", na
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 kotlinSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 hiltNavigationComopse = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose"}
+daggerHiltAndroid = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+daggerHiltAndroidCompiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 androidxTestExtJunit = { module = "androidx.test.ext:junit", version.ref = "androidxTestExt" }
@@ -40,3 +43,4 @@ composeUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", versi
 androidGradlePlugin = { id = "com.android.application", version.ref = "androidGradle" }
 kotlinPlugin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 serializationPlugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hiltAndroidGradlePlugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
