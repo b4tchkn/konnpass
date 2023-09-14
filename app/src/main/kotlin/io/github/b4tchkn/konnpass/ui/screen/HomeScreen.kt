@@ -1,5 +1,7 @@
 package io.github.b4tchkn.konnpass.ui.screen
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Divider
@@ -16,6 +18,7 @@ import io.github.b4tchkn.konnpass.state.event.EventStateViewModel
 @Composable
 fun HomeScreen(
     eventStateViewModel: EventStateViewModel = hiltViewModel(),
+    onEventPressed: (event: EventModel) -> Unit,
 ) {
     val eventState by eventStateViewModel.state.collectAsState()
 
@@ -24,7 +27,10 @@ fun HomeScreen(
             modifier = Modifier.padding(padding),
             states = listOf(eventStateViewModel),
         ) {
-            HomeScreen(events = eventState.data!!.events)
+            HomeScreen(
+                events = eventState.data!!.events,
+                onEventPressed = onEventPressed,
+            )
         }
     }
 }
@@ -32,11 +38,18 @@ fun HomeScreen(
 @Composable
 fun HomeScreen(
     events: List<EventModel>,
+    onEventPressed: (event: EventModel) -> Unit,
 ) {
     LazyColumn {
         items(events.size) { index ->
-            Text(text = events[index].title)
-            Divider()
+            Column(
+                modifier = Modifier.clickable {
+                    onEventPressed(events[index])
+                },
+            ) {
+                Text(text = events[index].title)
+                Divider()
+            }
         }
     }
 }
