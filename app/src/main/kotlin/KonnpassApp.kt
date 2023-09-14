@@ -20,13 +20,19 @@ fun KonnpassNavHost(
 ) {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            HomeScreen(onEventPressed = {
-                navController.navigate("event_detail/${it.title}")
-            })
+            HomeScreen(
+                onEventPressed = {
+                    navController.navigate("event_detail/${it.title}")
+                },
+            )
         }
         composable(
             "event_detail/{data}",
-            arguments = listOf(navArgument("data") { type = NavType.StringType }),
+            arguments = listOf(
+                navArgument("data") {
+                    type = NavType.StringType
+                },
+            ),
         ) {
             EventDetailScreen(it.arguments?.getString("data"))
         }
