@@ -38,7 +38,7 @@ fun HomeScreen(
 @Composable
 fun HomeScreen(
     events: List<EventModel>,
-    onEventPressed: (event: EventModel) -> Unit
+    onEventPressed: (event: EventModel) -> Unit,
 ) {
     LazyColumn {
         items(events.size) { index ->

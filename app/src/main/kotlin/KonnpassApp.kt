@@ -1,5 +1,4 @@
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -27,7 +26,7 @@ fun KonnpassNavHost(
         }
         composable(
             "event_detail/{data}",
-            arguments = listOf(navArgument("data") { type = NavType.StringType })
+            arguments = listOf(navArgument("data") { type = NavType.StringType }),
         ) {
             EventDetailScreen(it.arguments?.getString("data"))
         }

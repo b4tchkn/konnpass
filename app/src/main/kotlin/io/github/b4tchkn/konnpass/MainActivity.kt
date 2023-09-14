@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.b4tchkn.konnpass.ui.screen.HomeScreen
 import io.github.b4tchkn.konnpass.ui.theme.KonnpassTheme
 
 @AndroidEntryPoint
