@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.b4tchkn.konnpass.model.EventModel
+import io.github.b4tchkn.konnpass.state.LoadingStatus
 import io.github.b4tchkn.konnpass.state.event.EventStateViewModel
 
 @Composable
@@ -26,7 +27,9 @@ fun HomeScreen(
         ScreenCoordinator(
             modifier = Modifier.padding(padding),
             states = listOf(eventStateViewModel),
-            pullToRefresh = { eventStateViewModel.refresh() },
+            pullToRefresh = {
+                eventStateViewModel.refresh(loading = LoadingStatus.Refreshing)
+            },
         ) {
             HomeScreen(
                 events = eventState.data!!.events,

@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import io.github.b4tchkn.konnpass.R
 import io.github.b4tchkn.konnpass.state.AsyncStateViewModel
 import io.github.b4tchkn.konnpass.state.AsyncValue
+import io.github.b4tchkn.konnpass.state.LoadingStatus
 import io.github.b4tchkn.konnpass.ui.component.Gap
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -38,7 +39,8 @@ fun <V, T : AsyncStateViewModel<V>> ScreenCoordinator(
 ) {
     val collectedStates = states.map { it.state.collectAsState() }
 
-    val loading = collectedStates.map { it.value.loading }.any { it }
+    val loading = collectedStates.map { it.value.loading }.any { it == LoadingStatus.Loading }
+    val refreshing = collectedStates.map { it.value.loading }.any { it == LoadingStatus.Refreshing }
     val hasAllValues = collectedStates.map { it.value.data }.all { it != null }
     val hasError = collectedStates.map { it.value.error }.any { it != null }
     val refreshScope = rememberCoroutineScope()
@@ -50,7 +52,7 @@ fun <V, T : AsyncStateViewModel<V>> ScreenCoordinator(
     }
 
     val refreshState =
-        if (pullToRefresh != null) rememberPullRefreshState(loading, ::refresh) else null
+        if (pullToRefresh != null) rememberPullRefreshState(refreshing, ::refresh) else null
     val composableScope = rememberCoroutineScope()
 
     Box(
@@ -102,7 +104,7 @@ fun <V, T : AsyncStateViewModel<V>> ScreenCoordinator(
 
         if (refreshState != null) {
             PullRefreshIndicator(
-                refreshing = loading,
+                refreshing = refreshing,
                 state = refreshState,
                 modifier = Modifier.align(Alignment.TopCenter),
             )
@@ -135,7 +137,7 @@ fun PreviewSuccess() {
 @Composable
 fun PreviewLoading() {
     ScreenCoordinator(
-        states = listOf(FakeAsyncStateViewModel(AsyncValue(loading = true))),
+        states = listOf(FakeAsyncStateViewModel(AsyncValue(loading = LoadingStatus.Loading))),
     ) {
     }
 }
