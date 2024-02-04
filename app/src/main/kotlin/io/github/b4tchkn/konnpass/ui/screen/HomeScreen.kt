@@ -26,7 +26,7 @@ fun HomeScreen(
         ScreenCoordinator(
             modifier = Modifier.padding(padding),
             states = listOf(eventStateViewModel),
-            pullToRefresh = { eventStateViewModel.refresh() }
+            pullToRefresh = { eventStateViewModel.refresh() },
         ) {
             HomeScreen(
                 events = eventState.data!!.events,

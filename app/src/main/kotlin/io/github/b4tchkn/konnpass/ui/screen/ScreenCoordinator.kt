@@ -54,13 +54,11 @@ fun <V, T : AsyncStateViewModel<V>> ScreenCoordinator(
     val composableScope = rememberCoroutineScope()
 
     Box(
-        modifier = modifier
-            .fillMaxSize()
+        modifier = modifier.fillMaxSize(),
     ) {
         if (loading) {
             Box(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator()
@@ -91,26 +89,24 @@ fun <V, T : AsyncStateViewModel<V>> ScreenCoordinator(
             }
         }
         if (!loading && hasAllValues) {
-            if (refreshState == null)
+            if (refreshState == null) {
                 content()
-            else
+            } else {
                 Box(
-                    modifier = Modifier
-                        .pullRefresh(refreshState)
+                    modifier = Modifier.pullRefresh(refreshState),
                 ) {
                     content()
                 }
+            }
         }
 
-        if (refreshState != null)
+        if (refreshState != null) {
             PullRefreshIndicator(
                 refreshing = loading,
                 state = refreshState,
-                modifier = Modifier
-                    .align(
-                        Alignment.TopCenter
-                    )
+                modifier = Modifier.align(Alignment.TopCenter),
             )
+        }
     }
 }
 
