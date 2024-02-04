@@ -19,7 +19,7 @@ abstract class AsyncStateViewModel<T> : ViewModel() {
         fetch()
     }
 
-    suspend fun runAsync(block: suspend () -> T) {
+    private suspend fun runAsync(block: suspend () -> T) {
         viewModelScope.launch {
             kotlin.runCatching {
                 _state.value = _state.value.copy(loading = true)
