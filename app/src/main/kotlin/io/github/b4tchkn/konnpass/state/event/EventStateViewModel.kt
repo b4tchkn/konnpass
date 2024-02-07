@@ -38,6 +38,6 @@ class EventStateViewModel @Inject constructor(
     }
 
     companion object {
-        private const val LIMIT_LOAD_COUNT = 10
+        private const val LIMIT_LOAD_COUNT = 50
     }
 }
