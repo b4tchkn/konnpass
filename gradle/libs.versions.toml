@@ -9,7 +9,7 @@ compose = "1.6.1"
 retrofit = "2.9.0"
 okhttp = "4.12.0"
 kotlinSerialization = "1.6.3"
-hiltNavigationCompose = "1.1.0"
+hiltNavigationCompose = "1.2.0"
 hilt = "2.50"
 
 junit = "4.13.2"
