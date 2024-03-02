@@ -23,7 +23,7 @@ fun HomeScreen(
     eventStateViewModel: EventStateViewModel = hiltViewModel(
         creationCallback = { factory: EventStateViewModelFactory ->
             factory.create(EventStateViewModelParam())
-        }
+        },
     ),
     onEventPressed: (event: EventModel) -> Unit,
 ) {

@@ -6,7 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.b4tchkn.konnpass.model.EventResponseModel
 import io.github.b4tchkn.konnpass.state.AsyncStateViewModel
 import io.github.b4tchkn.konnpass.usecase.GetEventsUseCase
-import javax.inject.Inject
 
 @HiltViewModel(assistedFactory = EventStateViewModelFactory::class)
 class EventStateViewModel @AssistedInject constructor(
