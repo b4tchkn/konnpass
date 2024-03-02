@@ -77,7 +77,10 @@ fun EventDetailScreen(
             )
         },
     ) {
-        ScreenCoordinator(modifier = Modifier.padding(it), states = listOf(eventViewModel)) {
+        ScreenCoordinator(
+            modifier = Modifier.padding(it),
+            states = listOf(eventViewModel),
+        ) {
             EventDetailScreen(event = eventState.data!!.events.first())
         }
     }
