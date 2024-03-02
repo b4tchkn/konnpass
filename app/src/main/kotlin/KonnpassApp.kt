@@ -31,12 +31,12 @@ fun KonnpassNavHost(
             eventDetailScreenRoute,
             arguments = listOf(
                 navArgument(eventDetailScreenParamId) {
-                    type = NavType.StringType
+                    type = NavType.IntType
                 },
             ),
         ) {
             EventDetailScreen(
-                eventId = it.arguments?.getString(eventDetailScreenParamId),
+                eventId = it.arguments?.getInt(eventDetailScreenParamId),
                 onBackPressed = navController::popBackStack,
             )
         }
