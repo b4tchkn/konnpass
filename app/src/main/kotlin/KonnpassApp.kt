@@ -7,6 +7,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import io.github.b4tchkn.konnpass.ui.screen.EventDetailScreen
 import io.github.b4tchkn.konnpass.ui.screen.HomeScreen
+import io.github.b4tchkn.konnpass.ui.screen.eventDetailScreenParamId
+import io.github.b4tchkn.konnpass.ui.screen.eventDetailScreenRoute
+import io.github.b4tchkn.konnpass.ui.screen.navigateToEventDetailScreen
 
 @Composable
 fun KonnpassApp() {
@@ -21,20 +24,21 @@ fun KonnpassNavHost(
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
             HomeScreen(
-                onEventPressed = {
-                    navController.navigate("event_detail/${it.title}")
-                },
+                onEventPressed = navController::navigateToEventDetailScreen,
             )
         }
         composable(
-            "event_detail/{data}",
+            eventDetailScreenRoute,
             arguments = listOf(
-                navArgument("data") {
+                navArgument(eventDetailScreenParamId) {
                     type = NavType.StringType
                 },
             ),
         ) {
-            EventDetailScreen(it.arguments?.getString("data"))
+            EventDetailScreen(
+                eventId = it.arguments?.getString(eventDetailScreenParamId),
+                onBackPressed = navController::popBackStack,
+            )
         }
     }
 }

@@ -13,6 +13,12 @@ abstract class AsyncStateViewModel<T> : ViewModel() {
     val state: StateFlow<AsyncValue<T>>
         get() = _state
 
+    init {
+        viewModelScope.launch {
+            refresh()
+        }
+    }
+
     abstract suspend fun fetch(): T
 
     suspend fun refresh(loading: LoadingStatus = LoadingStatus.Loading) = runAsync(loading) {
