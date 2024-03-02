@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 abstract class AsyncStateViewModel<T> : ViewModel() {
     @VisibleForTesting
-    val _state = MutableStateFlow<AsyncValue<T>>(AsyncValue())
+    private val _state = MutableStateFlow<AsyncValue<T>>(AsyncValue())
     val state: StateFlow<AsyncValue<T>>
         get() = _state
 

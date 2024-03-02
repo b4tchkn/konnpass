@@ -114,10 +114,6 @@ fun <V, T : AsyncStateViewModel<V>> ScreenCoordinator(
 
 @SuppressLint("VisibleForTests")
 class FakeAsyncStateViewModel(asyncValue: AsyncValue<Unit>) : AsyncStateViewModel<Unit>() {
-    init {
-        _state.value = asyncValue
-    }
-
     override suspend fun fetch() {
         TODO("Not yet implemented")
     }
