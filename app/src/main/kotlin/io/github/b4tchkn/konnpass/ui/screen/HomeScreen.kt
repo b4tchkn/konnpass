@@ -15,10 +15,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.b4tchkn.konnpass.model.EventModel
 import io.github.b4tchkn.konnpass.state.LoadingStatus
 import io.github.b4tchkn.konnpass.state.event.EventStateViewModel
+import io.github.b4tchkn.konnpass.state.event.EventStateViewModelFactory
+import io.github.b4tchkn.konnpass.state.event.EventStateViewModelParam
 
 @Composable
 fun HomeScreen(
-    eventStateViewModel: EventStateViewModel = hiltViewModel(),
+    eventStateViewModel: EventStateViewModel = hiltViewModel(
+        creationCallback = { factory: EventStateViewModelFactory ->
+            factory.create(EventStateViewModelParam())
+        },
+    ),
     onEventPressed: (event: EventModel) -> Unit,
 ) {
     val eventState by eventStateViewModel.state.collectAsState()
