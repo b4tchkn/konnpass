@@ -77,23 +77,28 @@ fun EventDetailScreen(
             )
         },
     ) {
-        ScreenCoordinator(states = listOf(eventViewModel)) {
-            val event = eventState.data!!.events.first()
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp)
-                    .padding(it),
-            ) {
-                Text(
-                    text = event.title,
-                )
-                Text(text = event.hashTag)
-                Text(text = event.ownerNickname)
-                Text(text = event.ownerDisplayNames)
-                Text(text = event.description)
-                Text(text = event.address ?: "")
-            }
+        ScreenCoordinator(modifier = Modifier.padding(it), states = listOf(eventViewModel)) {
+            EventDetailScreen(event = eventState.data!!.events.first())
         }
+    }
+}
+
+@Composable
+fun EventDetailScreen(
+    event: EventModel,
+) {
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 16.dp),
+    ) {
+        Text(
+            text = event.title,
+        )
+        Text(text = event.hashTag)
+        Text(text = event.ownerNickname)
+        Text(text = event.ownerDisplayNames)
+        Text(text = event.description)
+        Text(text = event.address ?: "")
     }
 }
