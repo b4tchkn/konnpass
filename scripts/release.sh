@@ -50,7 +50,8 @@ done
 
 NEW_VERSION_NAME="$MAJOR.$MINOR.$PATCH"
 echo "🚀 Updating version to $NEW_VERSION_NAME($NEW_VERSION_CODE)"
-read -p "Do you want to release with this version? (y/n): " confirm
+read -p "Do you want to release with this version? (y/n) [y]: " confirm
+confirm=${confirm:-y}
 if [[ "$confirm" != "y" ]]; then
   echo "🚫 Release preparation has been cancelled."
   exit 1
