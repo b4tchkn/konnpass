@@ -76,6 +76,6 @@ git checkout -b "$BRANCH_NAME"
 git add "$VERSION_TOML_FILE"
 git commit -m "chore: update release version $NEW_VERSION_NAME($NEW_VERSION_CODE)"
 git push -u origin "$BRANCH_NAME"
-gh pr create --base main --head "$BRANCH_NAME" --title "release: update version: v$NEW_VERSION_NAME" --body-file "./RELEASE_PULL_REQUEST_TEMPLATE.md" --editor
+gh pr create --base main --head "$BRANCH_NAME" --title "release: update version: v$NEW_VERSION_NAME" --body-file ".github/RELEASE_PULL_REQUEST_TEMPLATE.md"
 
 echo "✅️ Release preparation completed successfully! Please check the pull request on GitHub."
