@@ -5,6 +5,7 @@ on:
     types: [ opened, synchronize ]
     branches:
       - 'main'
+      - 'chore/*'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
