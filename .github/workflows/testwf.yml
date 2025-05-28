@@ -10,6 +10,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+
 jobs:
   notify-slack-create-release-pr:
     if: github.event_name == 'pull_request' && github.event.action == 'opened' && startsWith(github.head_ref, 'release/')
