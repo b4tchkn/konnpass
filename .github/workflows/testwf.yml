@@ -5,6 +5,7 @@ on:
     types: [ opened, synchronize ]
     branches:
       - 'release/*'
+      - '**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
