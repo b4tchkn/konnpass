@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [ opened, synchronize ]
     branches:
-      - 'release/**'
+      - 'release/*'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -12,7 +12,6 @@ concurrency:
 
 jobs:
   notify-slack-create-release-pr:
-    if: github.event_name == 'pull_request' && github.event.action == 'opened'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
