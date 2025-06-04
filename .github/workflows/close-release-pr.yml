@@ -1,0 +1,59 @@
+name: Release Pull Request Close
+
+on:
+  pull_request:
+    types: [ closed ]
+    branches:
+      - main
+
+jobs:
+  create-release-tag:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && startsWith(github.head_ref, 'release/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+
+      - name: Set up Git
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+      - name: Create and push tag
+        env:
+          PR_BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+        run: |
+          TAG_NAME=$(echo "$PR_BRANCH_NAME" | sed -E 's|release/(v[0-9]+\.[0-9]+\.[0-9]+)|\1|')
+          if [ -z "$TAG_NAME" ]; then
+            echo "Error: TAG_NAME is empty. Cannot create tag."
+            exit 1
+          fi
+          git tag "$TAG_NAME"
+          git push origin "$TAG_NAME"
+  
+
+  create-pr-to-develop:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && startsWith(github.head_ref, 'release/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Git
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+      - name: Create pull request to develop
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create --base develop --head "$PR_BRANCH_NAME" --title "Release $TAG_NAME" --body "This PR merges the changes from the release branch into develop."
