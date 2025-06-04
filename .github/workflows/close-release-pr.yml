@@ -60,5 +60,5 @@ jobs:
           gh pr create \
             --base develop
             --head main
-            --title "chore: Merge main changes into develop for ${{ TAG }}"
+            --title "chore: Merge main changes into develop for $TAG"
             --body "🤖 PR auto generated from job : ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
