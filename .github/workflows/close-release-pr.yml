@@ -56,4 +56,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create --base develop --head "$PR_BRANCH_NAME" --title "Release $TAG_NAME" --body "This PR merges the changes from the release branch into develop."
+          TAG=$(git describe --tags --abbrev=0)
+          gh pr create \
+            --base develop
+            --head main
+            --title "chore: Merge main changes into develop for ${{ TAG }}"
+            --body "🤖 PR auto generated from job : ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
