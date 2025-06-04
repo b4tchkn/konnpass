@@ -35,9 +35,9 @@ jobs:
           git tag "$TAG_NAME"
           git push origin "$TAG_NAME"
   
-
   create-pr-to-develop:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && startsWith(github.head_ref, 'release/')
+    needs: [ create-release-tag ]
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
