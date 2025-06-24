@@ -3,7 +3,7 @@ name: Create Release Note
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "*"
 
 jobs:
   build:
