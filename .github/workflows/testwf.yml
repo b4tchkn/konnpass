@@ -1,23 +1,20 @@
-name: test pull request ci
+name: Create Release Note
 
 on:
-  pull_request:
-    types: [ opened, synchronize ]
-    branches:
-      - 'main'
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
-  notify-slack-create-release-pr:
-    if: github.event_name == 'pull_request' && github.event.action == 'opened' && startsWith(github.head_ref, 'release/')
+  build:
     runs-on: ubuntu-latest
-#    hoge, hoge, hoge
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: sample step
-        run: echo "This is a sample step to demonstrate the workflow."
+      - name: Release
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8 # v2.3.2
+        with:
+          generate_release_notes: true
