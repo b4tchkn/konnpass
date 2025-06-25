@@ -34,7 +34,22 @@ jobs:
           fi
           git tag "$TAG_NAME"
           git push origin "$TAG_NAME"
-  
+
+  create-release-note:
+    if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'release/') && !cancelled() && !failure()
+    needs: [ create-release-tag ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Release
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8 # v2.3.2
+        with:
+          generate_release_notes: true
+
   create-pr-to-develop:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && startsWith(github.head_ref, 'release/')
     needs: [ create-release-tag ]
