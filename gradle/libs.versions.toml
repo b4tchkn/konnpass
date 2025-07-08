@@ -3,7 +3,7 @@ versionCode = "60"
 versionName = "2.15.0"
 
 androidGradle = "8.3.0"
-kotlin = "1.9.22"
+kotlin = "1.9.25"
 
 androidxCore = "1.12.0"
 androidxLifecycle = "2.7.0"
