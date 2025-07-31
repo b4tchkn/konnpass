@@ -81,6 +81,6 @@ jobs:
           TAG=$(git describe --tags --abbrev=0)
           gh pr create \
             --base develop \
-            --head $${ github.head_ref }} \
+            --head ${{ github.head_ref }} \
             --title "chore: Merge release changes into develop for $TAG" \
             --body "🤖 PR auto generated from job : ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
