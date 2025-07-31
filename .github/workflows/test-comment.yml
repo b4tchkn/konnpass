@@ -1,0 +1,26 @@
+name: Test Comment Action
+
+on:
+  issue_comment:
+    types: [ created ]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  claude-code-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Action
+        run: |
+          echo "This is a test comment action."
+          echo "You can customize this action to perform any task you want when a comment is created on an issue or pull request."
